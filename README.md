@@ -24,9 +24,15 @@ I'm a Web Penetration Tester And Learning Bug Hunting And Reverse Engineering.
 
 ---
 
+### [![Read My Book](https://img.shields.io/badge/Read-My%20Book-blue)](https://leanpub.com/probotisop/embed)
+
+
+
+
 ### Connect with Me
 
 [<img align="left" alt="ProbotisOP" width="30px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />](#) [<img align="left" alt="Twitter - ProbotisOP" width="30px" src="https://raw.githubusercontent.com/johan/svg-cleanups/master/logos/twitter.svg" />](https://twitter.com/ProbotisOP) [<img align="left" alt="Instagram - ProbotisOP" width="30px" src="https://github.com/simple-icons/simple-icons/raw/develop/icons/instagram.svg" />](https://www.instagram.com/sohal.zip) [<img align="left" alt="LinkedIn - hackfluentz" width="30px" src="https://github.com/simple-icons/simple-icons/raw/develop/icons/linkedin.svg" />](https://www.linkedin.com/in/satnam-singh-860823142) [<img align="left" alt="YouTube -ProbotisOP" width="30px" src="https://github.com/simple-icons/simple-icons/raw/develop/icons/youtube.svg" />](https://www.youtube.com/watch?v=dQw4w9WgXcQ) [<img align="left" alt="Email -Rohan Das" width="30px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/envelope-closed.svg" />](mailto:satnam9988877550@gmail.com)
+
 
 ---
 
