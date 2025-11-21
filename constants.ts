@@ -3,7 +3,7 @@ import { Experience, SkillCategory, Achievement, Certification } from './types';
 export const RESUME_DATA = {
   personal: {
     name: "Satnam Singh",
-    email: "sohalsatnam792@gmail.com",
+    email: "probotisop@gmail.com",
     role: "Senior Backend & Security Engineer",
     summary: "Developer with 3+ years of experience in backend development, DevOps, and scalable system design. Specializing in Java, Spring Boot, and Python. Deep expertise in Adobe AEM and Security (Pentesting, Vulnerability Research). Enthusiastic about AI-driven workflows.",
     links: {
