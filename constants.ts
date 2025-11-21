@@ -7,7 +7,7 @@ export const RESUME_DATA = {
     role: "Senior Backend & Security Engineer",
     summary: "Developer with 3+ years of experience in backend development, DevOps, and scalable system design. Specializing in Java, Spring Boot, and Python. Deep expertise in Adobe AEM and Security (Pentesting, Vulnerability Research). Enthusiastic about AI-driven workflows.",
     links: {
-      linkedin: "https://www.linkedin.com/in/satnam-singh-sohal/",
+      linkedin: "https://www.linkedin.com/in/satnams/",
       github: "https://github.com/ProbotisOP"
     }
   },
