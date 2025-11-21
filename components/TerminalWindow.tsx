@@ -44,9 +44,13 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
 
   // Adjust initial size for mobile
   useEffect(() => {
-    if (window.innerWidth < 768) {
-      setSize({ width: window.innerWidth - 20, height: window.innerHeight * 0.6 });
-      setPosition({ x: 10, y: 80 });
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      setSize({ 
+        width: window.innerWidth - 10, 
+        height: window.innerHeight - 120 
+      });
+      setPosition({ x: 5, y: 60 });
     }
   }, []);
 
@@ -71,8 +75,9 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
     setRotation({ x: 0, y: 0 });
   };
 
-  // Drag Logic
+  // Drag Logic - Disabled on mobile
   const startDrag = (e: React.MouseEvent) => {
+    if (window.innerWidth < 768) return; // Disable dragging on mobile
     e.preventDefault();
     onFocus();
     setIsDragging(true);
@@ -83,8 +88,9 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
     setRotation({ x: 0, y: 0 }); // Reset rotation when dragging starts
   };
 
-  // Resize Logic
+  // Resize Logic - Disabled on mobile
   const startResize = (e: React.MouseEvent) => {
+    if (window.innerWidth < 768) return; // Disable resizing on mobile
     e.preventDefault();
     e.stopPropagation();
     onFocus();
@@ -172,9 +178,9 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
           {/* Window Header */}
           <div 
             className={`
-              bg-[#161b22] px-4 py-2 flex items-center justify-between border-b 
+              bg-[#161b22] px-3 md:px-4 py-2 flex items-center justify-between border-b 
               ${isDragging ? 'border-green-400 bg-green-900/20' : 'border-[#30363d]'}
-              cursor-grab active:cursor-grabbing select-none transition-colors duration-200
+              md:cursor-grab md:active:cursor-grabbing select-none transition-colors duration-200
             `}
             onMouseDown={startDrag}
           >
@@ -197,7 +203,7 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
           </div>
 
           {/* Window Content */}
-          <div className="flex-1 overflow-y-auto p-6 text-gray-300 font-mono text-sm md:text-base bg-[#0d1117]/95 scrollbar-hide">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 text-gray-300 font-mono text-xs md:text-sm lg:text-base bg-[#0d1117]/95 scrollbar-hide overscroll-contain">
             {children}
           </div>
           
@@ -209,9 +215,9 @@ export const TerminalWindow: React.FC<TerminalWindowProps> = ({
             </div>
             <span>TYPE: BASH</span>
             
-            {/* Resize Handle */}
+            {/* Resize Handle - Hidden on mobile */}
             <div 
-              className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize flex items-end justify-end p-0.5 hover:bg-white/10"
+              className="hidden md:block absolute bottom-0 right-0 w-4 h-4 cursor-se-resize flex items-end justify-end p-0.5 hover:bg-white/10"
               onMouseDown={startResize}
             >
               <svg viewBox="0 0 10 10" className="w-2 h-2 text-gray-500 fill-current opacity-50">

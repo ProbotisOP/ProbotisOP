@@ -7,23 +7,25 @@ const Icon: React.FC<{ label: string; icon: React.ReactNode; onClick: () => void
   <button 
     onClick={onClick}
     className={`
-      group flex flex-col items-center gap-2 p-3 rounded-lg transition-all duration-300
-      hover:bg-white/10 backdrop-blur-sm w-24 relative
+      group flex flex-col items-center gap-1 md:gap-2 p-2 md:p-3 rounded-lg transition-all duration-300
+      hover:bg-white/10 backdrop-blur-sm w-16 md:w-24 relative touch-manipulation
       ${active ? 'bg-white/5 ring-1 ring-green-500/50' : ''}
     `}
   >
     <div className={`
-      w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110
+      w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110 active:scale-95
       ${active ? 'bg-gray-800 text-green-400 shadow-green-500/20' : 'bg-black/80 text-gray-400 border border-gray-700'}
     `}>
-      {icon}
+      <div className="w-5 h-5 md:w-6 md:h-6">
+        {icon}
+      </div>
     </div>
-    <span className="text-xs font-mono text-gray-300 bg-black/50 px-2 py-1 rounded backdrop-blur-md border border-gray-800 group-hover:text-green-400 transition-colors">
+    <span className="text-[10px] md:text-xs font-mono text-gray-300 bg-black/50 px-1.5 md:px-2 py-0.5 md:py-1 rounded backdrop-blur-md border border-gray-800 group-hover:text-green-400 transition-colors truncate max-w-full">
       {label}
     </span>
     {/* Status Indicator */}
     {active && (
-      <div className={`absolute right-2 top-2 w-2 h-2 rounded-full ${minimized ? 'bg-yellow-500' : 'bg-green-500'} shadow-lg ring-1 ring-black`}></div>
+      <div className={`absolute right-1 top-1 w-2 h-2 rounded-full ${minimized ? 'bg-yellow-500' : 'bg-green-500'} shadow-lg ring-1 ring-black`}></div>
     )}
   </button>
 );
@@ -31,7 +33,7 @@ const Icon: React.FC<{ label: string; icon: React.ReactNode; onClick: () => void
 export const Desktop: React.FC = () => {
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [topZIndex, setTopZIndex] = useState(10);
+  const [topZIndex, setTopZIndex] = useState(50);
 
   useEffect(() => {
     // Open Profile by default
@@ -107,23 +109,23 @@ export const Desktop: React.FC = () => {
     switch (type) {
       case WindowType.PROFILE:
         return (
-            <div className="space-y-6">
-              <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                <div className="w-32 h-32 rounded-full border-2 border-green-500 p-1 shadow-[0_0_20px_rgba(34,197,94,0.4)] relative overflow-hidden group flex-shrink-0">
+            <div className="space-y-4 md:space-y-6">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center md:items-start">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-green-500 p-1 shadow-[0_0_20px_rgba(34,197,94,0.4)] relative overflow-hidden group flex-shrink-0">
                   <img src="https://picsum.photos/200/200?grayscale" alt="Satnam" className="w-full h-full rounded-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute inset-0 bg-green-500/20 animate-pulse rounded-full"></div>
                 </div>
                 <div className="flex-1 space-y-2 text-center md:text-left">
-                  <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tighter">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tighter">
                     <span className="text-green-500">$</span> {RESUME_DATA.personal.name}
                   </h1>
-                  <p className="text-xl text-gray-400 font-light border-b border-gray-700 pb-2">
+                  <p className="text-base md:text-lg lg:text-xl text-gray-400 font-light border-b border-gray-700 pb-2">
                     {RESUME_DATA.personal.role}
                   </p>
-                  <div className="text-sm text-gray-500 mt-2 font-mono">
+                  <div className="text-xs md:text-sm text-gray-500 mt-2 font-mono">
                     <p>UID: 0 (root)</p>
                     <p>GID: 0 (root)</p>
-                    <p>Groups: wheel, docker, aws-admin, sec-ops</p>
+                    <p className="hidden sm:block">Groups: wheel, docker, aws-admin, sec-ops</p>
                   </div>
                 </div>
               </div>
@@ -269,7 +271,7 @@ export const Desktop: React.FC = () => {
                    <div className="space-y-4">
                      <div className="flex flex-col gap-1">
                         <span className="text-green-600 text-xs uppercase">Email Protocol</span>
-                        <a href={`mailto:${RESUME_DATA.personal.email}`} className="text-xl md:text-2xl text-white hover:text-green-400 hover:bg-green-900/20 transition-all p-2 rounded">
+                        <a href={`mailto:${RESUME_DATA.personal.email}`} className="text-sm md:text-xl lg:text-2xl text-white hover:text-green-400 hover:bg-green-900/20 transition-all p-2 rounded break-all">
                           {RESUME_DATA.personal.email}
                         </a>
                      </div>
@@ -303,56 +305,58 @@ export const Desktop: React.FC = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#0d1117] text-white perspective-container">
       
-      {/* Background Grid */}
+      {/* Background Grid - Simplified on mobile */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-20"
+        className="absolute inset-0 pointer-events-none opacity-10 md:opacity-20"
         style={{
           backgroundImage: 'linear-gradient(#22c55e 1px, transparent 1px), linear-gradient(90deg, #22c55e 1px, transparent 1px)',
           backgroundSize: '50px 50px',
-          transform: `perspective(1000px) rotateX(20deg) translateZ(-100px) translateX(${mousePos.x * -1}px) translateY(${mousePos.y * -1}px)`,
+          transform: window.innerWidth >= 768 
+            ? `perspective(1000px) rotateX(20deg) translateZ(-100px) translateX(${mousePos.x * -1}px) translateY(${mousePos.y * -1}px)`
+            : 'none',
         }}
       />
 
-      {/* Floating Particles/Orbs for depth */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+      {/* Floating Particles/Orbs for depth - Hidden on mobile for performance */}
+      <div className="hidden md:block absolute top-1/4 left-1/4 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse" />
+      <div className="hidden md:block absolute bottom-1/3 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
 
       {/* Desktop Icons Area (Taskbar/Launcher) */}
-      <div className="absolute top-0 left-0 h-full w-28 md:w-32 flex flex-col gap-6 p-4 z-50 pt-10 pointer-events-auto bg-gradient-to-r from-black/20 to-transparent">
+      <div className="absolute top-0 left-0 h-full w-20 md:w-32 flex flex-col gap-3 md:gap-6 p-2 md:p-4 z-10 pt-6 md:pt-10 pointer-events-auto bg-gradient-to-r from-black/40 md:from-black/20 to-transparent">
         <Icon 
           label="whoami" 
           {...getWindowStatus(WindowType.PROFILE)}
           onClick={() => handleOpenWindow(WindowType.PROFILE)}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>} 
+          icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>} 
         />
         <Icon 
           label="history" 
           {...getWindowStatus(WindowType.EXPERIENCE)}
           onClick={() => handleOpenWindow(WindowType.EXPERIENCE)}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>} 
+          icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>} 
         />
         <Icon 
           label="skills" 
           {...getWindowStatus(WindowType.SKILLS)}
           onClick={() => handleOpenWindow(WindowType.SKILLS)}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>} 
+          icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>} 
         />
         <Icon 
           label="exploits" 
           {...getWindowStatus(WindowType.SECURITY)}
           onClick={() => handleOpenWindow(WindowType.SECURITY)}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>} 
+          icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>} 
         />
         <Icon 
           label="connect" 
           {...getWindowStatus(WindowType.CONTACT)}
           onClick={() => handleOpenWindow(WindowType.CONTACT)}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>} 
+          icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>} 
         />
       </div>
 
       {/* Windows Area */}
-      <div className="absolute inset-0 pointer-events-none z-0">
+      <div className="absolute inset-0 pointer-events-none">
         {windows.map((win, index) => (
           <TerminalWindow
             key={win.id}
