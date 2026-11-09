@@ -10,6 +10,17 @@ export interface Project {
   name: string;
   description: string;
   tech: string[];
+  link?: string;
+  github?: string;
+  metric?: string;
+}
+
+export interface Education {
+  degree: string;
+  school: string;
+  year: string;
+  gpa?: string;
+  details?: string;
 }
 
 export interface SkillCategory {
@@ -35,6 +46,7 @@ export enum AppState {
 export enum WindowType {
   PROFILE = 'WHOAMI',
   EXPERIENCE = 'HISTORY',
+  PROJECTS = 'PROJECTS',
   SKILLS = 'MAN SKILLS',
   SECURITY = 'MSFCONSOLE',
   CONTACT = 'NC -LVNP',

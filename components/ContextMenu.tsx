@@ -14,8 +14,8 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ onSecurityBreach }) =>
       e.preventDefault();
       
       // Adjust position to keep menu on screen
-      const x = e.clientX > window.innerWidth - 220 ? e.clientX - 220 : e.clientX;
-      const y = e.clientY > window.innerHeight - 200 ? e.clientY - 200 : e.clientY;
+      const x = e.clientX > window.innerWidth - 240 ? e.clientX - 240 : e.clientX;
+      const y = e.clientY > window.innerHeight - 240 ? e.clientY - 240 : e.clientY;
       
       setPosition({ x, y });
       setVisible(true);
@@ -35,9 +35,14 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ onSecurityBreach }) =>
 
   const menuItems = [
     { 
-      label: 'Inspect Element', 
-      action: () => window.open(RESUME_DATA.personal.links.github, '_blank'),
+      label: 'Inspect Profile', 
+      action: () => window.open(RESUME_DATA.personal.links.linkedin, '_blank'),
       icon: '🔍'
+    },
+    { 
+      label: 'Download Resume (PDF)', 
+      action: () => window.open('./Satnam_ResumeCO-OP.pdf', '_blank'),
+      icon: '📄'
     },
     { 
       label: 'View Source Code', 
@@ -58,11 +63,11 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ onSecurityBreach }) =>
 
   return (
     <div 
-      className="fixed z-[10000] bg-[#0d1117]/95 backdrop-blur-md border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)] min-w-[220px] rounded font-mono text-sm overflow-hidden"
+      className="fixed z-[10000] bg-[#0d1117]/95 backdrop-blur-md border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)] min-w-[240px] rounded font-mono text-sm overflow-hidden"
       style={{ top: position.y, left: position.x }}
     >
         <div className="bg-green-900/20 px-3 py-1 text-[10px] text-green-500 border-b border-green-500/30 flex justify-between items-center">
-           <span>CTX_MENU_V1</span>
+           <span>CTX_MENU_V2</span>
            <span className="animate-pulse">●</span>
         </div>
         <div className="p-1">
